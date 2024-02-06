@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texto Escribiéndose con JavaScript</title>
+    <style>
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        .typing-text {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #000; /* Puedes ajustar el estilo del cursor aquí */
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <span id="apiText" class="typing-text"></span>
+
+    <script>
+        // Simulando una respuesta de la API (puedes reemplazar esto con tu llamada real a la API)
+        const apiResponse = "Este es el texto de la API.";
+
+        // Función para animar el texto
+        function animateText(text, elementId) {
+            const element = document.getElementById(elementId);
+            element.style.animation = 'none'; // Reinicia la animación
+            element.offsetHeight; // Triggers reflow, así que la animación se reinicia correctamente
+            element.style.animation = null; // Elimina la animación anterior
+            element.innerHTML = ''; // Limpia el contenido del elemento
+
+            // Agrega cada letra con la animación
+            for (let i = 0; i < text.length; i++) {
+                setTimeout(() => {
+                    element.innerHTML += text[i];
+                }, i * 50); // Ajusta la velocidad aquí
+            }
+        }
+
+        // Llama a la función con el texto de la API
+        animateText(apiResponse, 'apiText');
+    </script>
+</body>
+</html>
